@@ -30,6 +30,7 @@ ssize_t write_(int fd, const void *buf, size_t count) {
             return result_len; //complite
         }
   }
+<<<<<<< HEAD
 }
 
 ssize_t read_until(int fd, void * buf, size_t count, char delimiter) {
@@ -49,4 +50,6 @@ ssize_t read_until(int fd, void * buf, size_t count, char delimiter) {
     }
     return current_counter;
     
+=======
+>>>>>>> caf9b91... first task result commit
 }
