@@ -31,3 +31,22 @@ ssize_t write_(int fd, const void *buf, size_t count) {
         }
   }
 }
+
+ssize_t read_until(int fd, void * buf, size_t count, char delimiter) {
+    int current_counter, n;
+    for (current_counter = 0; current_counter < count; current_counter++) {
+        n = read(fd, buf + current_counter, 1);
+        if (n == -1){
+            return -1;
+        }
+        if (n == 0){
+            return current_counter;
+        }
+        if ((((char*)buf)[current_counter]) == delimiter)
+        {
+            return ++current_counter;
+        }
+    }
+    return current_counter;
+    
+}
