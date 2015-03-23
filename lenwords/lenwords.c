@@ -4,23 +4,11 @@
 #include <stdio.h>
 #include <helpers.h>
 
-const size_t BUFFER_SIZE = 4096;
+const size_t BUFFER_SIZE = 4097;
 
 void print_err() {
     char *msg = strerror(errno);
     write_(STDERR_FILENO, msg, strlen(msg));
-}
-
-void reverse(char *begin, char *end) {
-    char temp;
-    while(begin<end)
-    {
-        temp = *end;
-        *(end--) = *begin;
-        *(begin++) = temp;
-
-    }
-    return;
 }
 
 int main() {
@@ -32,7 +20,7 @@ int main() {
             print_err();
         }
 
-        buffer = sprintf("%d ",(buffer + n - 2 + (buffer[n - 1] != ' ')-buffer));
+        n = sprintf(buffer,"%d ",(n - (buffer[n - 1] == ' ')));
         if (write(STDOUT_FILENO, buffer, n) == -1) {
             print_err();
         }
