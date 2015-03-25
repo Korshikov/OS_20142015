@@ -1,4 +1,5 @@
 #include <sys/types.h>
+#include <unistd.h>
 #include "helpers.h"
 
 ssize_t read_(int fd, void *buf, size_t count) {
@@ -30,7 +31,7 @@ ssize_t write_(int fd, const void *buf, size_t count) {
             return result_len; //complite
         }
   }
-<<<<<<< HEAD
+
 }
 
 ssize_t read_until(int fd, void * buf, size_t count, char delimiter) {
@@ -48,8 +49,20 @@ ssize_t read_until(int fd, void * buf, size_t count, char delimiter) {
             return ++current_counter;
         }
     }
-    return current_counter;
+    return current_counter; 
+}
+
+int spawn(const char * file, char * const argv [])
+{
+    pid_t pid = fork();
+    if (!pid) {
+        execvp(file, argv);
+    }
     
-=======
->>>>>>> caf9b91... first task result commit
+    int ret_code;
+    if (waitpid(pid, &ret_code, 0) < 0) {
+        return  -1;
+    }
+
+    return ret_code;
 }
