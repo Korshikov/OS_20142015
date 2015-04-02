@@ -60,9 +60,7 @@ int spawn(const char * file, char * const argv [])
     }
     
     int ret_code;
-    if (waitpid(pid, &ret_code, 0) < 0) {
-        return  -1;
-    }
+    wait(&ret_code);
 
     return ret_code;
 }
