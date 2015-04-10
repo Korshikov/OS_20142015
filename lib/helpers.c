@@ -1,4 +1,5 @@
 #include <sys/types.h>
+#include <sys/wait.h>
 #include <unistd.h>
 #include "helpers.h"
 
@@ -55,12 +56,25 @@ ssize_t read_until(int fd, void * buf, size_t count, char delimiter) {
 int spawn(const char * file, char * const argv [])
 {
     pid_t pid = fork();
+    int status;
     if (!pid) {
         execvp(file, argv);
     }
-    
-    int ret_code;
-    wait(&ret_code);
+    else
+    {
+        if(pid>0)
+        {
+            waitpid(pid, &status, 0);
+            if (WIFEXITED(status)) 
+            {
+                return WEXITSTATUS(status);
+            } 
+            else 
+            {
+                return -1;
+            }
+        }
+    }
 
-    return ret_code;
+    return -1;
 }

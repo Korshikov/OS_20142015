@@ -5,6 +5,7 @@ all:
 	make -C lenwords/
 	make -C filter/
 	make -C bufcat/
+	make -C foreach/
 
 clean:
 	make clean -C lib/
@@ -13,3 +14,4 @@ clean:
 	make clean -C lenwords/
 	make clean -C filter/
 	make clean -C bufcat/
+	make clean -C foreach/

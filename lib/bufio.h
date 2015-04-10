@@ -4,7 +4,7 @@
 #include <sys/types.h>
 
 struct buf_t {
-    size_t capacity, size;
+    size_t capacity, size, pos;
     char *data;
 };
 
@@ -14,5 +14,6 @@ size_t buf_capacity(struct buf_t*);
 size_t buf_size(struct buf_t*);
 ssize_t buf_fill(int fd, struct buf_t *buf, size_t required);
 ssize_t buf_flush(int fd, struct buf_t *buf, size_t required);
+ssize_t buf_getline(int fd, struct buf_t *buf, char* dest);
 
 #endif
