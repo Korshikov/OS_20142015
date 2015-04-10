@@ -54,7 +54,7 @@ ssize_t buf_getline(int fd, struct buf_t *buf, char* dest)
     {
         if(buf->size<=buf->pos)
         {
-            int counter = read_(fd, buf->data, buf->capacity);
+            int counter = read(fd, buf->data, buf->capacity);
             buf->pos=0;
             if(counter>0)
             {
@@ -63,7 +63,7 @@ ssize_t buf_getline(int fd, struct buf_t *buf, char* dest)
             else
             {
                 buf->size = 0;
-                dest[++position] = 0;
+                dest[position++] = 0;
                 return counter;
             }
             
@@ -73,7 +73,7 @@ ssize_t buf_getline(int fd, struct buf_t *buf, char* dest)
             if((dest[position++]=buf->data[buf->pos++])=='\n')
             {
                 dest[position-1]=0;
-                return position;
+                return position-1;
             }
         }
     }

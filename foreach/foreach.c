@@ -1,6 +1,7 @@
 #include <errno.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 #include <unistd.h>
 #include "bufio.h"
 #include "helpers.h"
@@ -44,6 +45,7 @@ int main(int arg_len, char* args[]) {
 
 
    do{
+        line[0]=0;
         n = buf_getline(STDIN_FILENO, buffer, line);
         if((!(n&1))&&(n))
         {
@@ -52,7 +54,7 @@ int main(int arg_len, char* args[]) {
             }
         }
         
-    } while (n > 0);
+    } while (n >= 0);
 
     free(spawn_args);
 
